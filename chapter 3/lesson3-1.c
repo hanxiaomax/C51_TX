@@ -1,4 +1,3 @@
-/*�������ʾ*/
 #include<reg52.h>
 sbit DS=P2^6;
 sbit WS=P2^7;
@@ -17,17 +16,17 @@ void delay_ms(unsigned int time);
 void main()
 {
 	unsigned int i;
-	WS=1;
-	P0=screen[0];
-	WS=0;
+	WS=1;/*打开位选锁存*/
+	P0=screen[0];/*选择第一个屏幕*/
+	WS=0;/*关闭锁存*/
 	while(1)
 	{
 		for(i=0;i<16;i++)
 		{
-			DS=1;
-			P0=number[i];
-			DS=0;
-			delay_ms(500);
+			DS=1;/*打开段选锁存*/
+			P0=number[i];/*更新数字*/
+			DS=0;/*关闭段选锁存*/
+			delay_ms(500);/*延时500ms*/
 		}
 	}
 }
@@ -35,6 +34,6 @@ void delay_ms(unsigned int time)
 {
 	unsigned int i,j;
 	for(i=time;i>0;i--)
-		for(j=110;j>0;j--)
+		for(j=110;j>0;j--)/*内层j=110，延时毫秒数大致为time*/
 				;
 }
